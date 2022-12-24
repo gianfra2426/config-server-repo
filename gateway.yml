@@ -1,0 +1,34 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: department-route
+          #uri: http://microservice-demo:8081/
+          uri: lb://DEPARTMENT-SERVICE
+          predicates:
+            - Path=/department/**
+  devtools:
+    restart:
+      enabled: false
+
+server:
+  port: 8080
+
+eureka:
+  instance:
+    hostname: eureka-server
+    preferIpAddress: true
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    eureka-server-port: 8761
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.client.eureka-server-port}/eureka/
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info
