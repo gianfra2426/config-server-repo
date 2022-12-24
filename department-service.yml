@@ -11,12 +11,12 @@
 #      ddl-auto: update
 
 server:
-  port: 8082
+  port: 8081
 
 eureka:
   instance:
-    #hostname: eureka-server
-    hostname: localhost
+    hostname: eureka-server
+    #hostname: localhost
     preferIpAddress: true
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
   client:
